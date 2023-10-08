@@ -69,6 +69,13 @@ describe("ApiService", () => {
       const req = httpMock.expectOne(`${environment.api_url}/test`);
       expect(req.request.method).toBe("PUT");
       req.flush(mockBody);
+
+      service
+        .put("/test")
+        .subscribe((data) => expect(data).toEqual({}));
+      const reqDefault = httpMock.expectOne(`${environment.api_url}/test`);
+      expect(reqDefault.request.method).toBe("PUT");
+      reqDefault.flush({});
     });
 
     it("post should return an Observable", () => {
@@ -81,6 +88,13 @@ describe("ApiService", () => {
       const req = httpMock.expectOne(`${environment.api_url}/test`);
       expect(req.request.method).toBe("POST");
       req.flush(mockBody);
+
+      service
+        .post("/test")
+        .subscribe((data) => expect(data).toEqual({}));
+      const reqDefault = httpMock.expectOne(`${environment.api_url}/test`);
+      expect(reqDefault.request.method).toBe("POST");
+      reqDefault.flush({});
     });
 
     it("delete should return an Observable", () => {
